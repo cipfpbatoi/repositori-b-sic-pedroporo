@@ -1,7 +1,4 @@
 <?php
-            function suma(int $a, int $b): int {
-                return $a + $b;
-            }
             function getWord() : String {
                 $ch= curl_init();
                 $headers=[
@@ -17,22 +14,22 @@
                 curl_close($ch);
                 return str_replace(["[","]",'"'],"",$data);
             }
-            function createArraySecreta(string &$secreta,&$letrasAdivinadas){
+            function createArraySecreta(string &$secreta,$letrasAdivinadas){
                 $letrasSecreta=str_split($secreta);
-                $array=[];
                 for ($i=0; $i < count($letrasSecreta); $i++) { 
                     if (in_array($letrasSecreta[$i],$letrasAdivinadas)) {
-                        $array[$i]="$letrasSecreta[$i]";
+                        echo "<a class='correct'>$letrasSecreta[$i] </a>";
                     }else{
-                        $array[$i]="_";
+                        echo "<a>_ </a>";
                     }
                 }
-                return $array;
             }
-            function comprobarLetra(string $letra,string &$secreta,&$letrasAdivinadas) {
-                if (!in_array($letra,$letrasAdivinadas)) {
+            function comprobarLetra(string $letra,string $secreta,&$letrasAdivinadas,&$incorrectas) {
+                if (!in_array($letra,$letrasAdivinadas)&&!in_array($letra,$incorrectas)) {
                     if (in_array($letra,str_split($secreta))) {
-                        $letrasAdivinadas[count($letrasAdivinadas)+1]=$letra;
+                        $letrasAdivinadas[]=$letra;
+                    }else{
+                        $incorrectas[]=$letra;
                     }
                     
                 }
