@@ -19,7 +19,7 @@
                 }
                 return $tablas;
             }
-            $multipli=crearArrayTabla(1,5);
+            $multipli=crearArrayTabla(0,5);
             foreach ($multipli as $tabla => $operaciones) { 
                 echo "<table style='border: 1px solid'>";
                 echo "<tr><td style='border: 1px solid'>Tabla del $tabla</td></tr>";

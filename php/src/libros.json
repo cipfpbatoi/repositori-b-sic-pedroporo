@@ -1,0 +1,36 @@
+{
+  "1": {
+    "module": "desarrolloCliente",
+    "publisher": "12",
+    "price": "12",
+    "pages": "12",
+    "status": "malo",
+    "comments": "12"
+  },
+  "2": {
+    "module": "desarrolloCliente",
+    "publisher": "Pedro",
+    "price": "13\u20ac",
+    "pages": "123",
+    "status": "bueno",
+    "comments": "Hola"
+  },
+  "3": {
+    "module": "disenyInterfaces",
+    "publisher": "Perro",
+    "price": "11111",
+    "pages": "12",
+    "status": "bueno",
+    "comments": "Hola",
+    "photo": "./imgs/test.jpg"
+  },
+  "4": {
+    "module": "disenyInterfaces",
+    "publisher": "Perro",
+    "price": "11111",
+    "pages": "12",
+    "status": "bueno",
+    "comments": "Hola",
+    "photo": "./imgs/test.jpg"
+  }
+}
