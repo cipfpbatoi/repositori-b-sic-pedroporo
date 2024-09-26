@@ -17,18 +17,6 @@
         hacerMovimiento($pantalla,$columna,$jugador);
     }
     elegirJugador($jugador);
-
-    //var_dump($pantalla);
-    /*$secreta = $_POST['secreta'] ?? getWord();
-    $correctas = json_decode(htmlspecialchars_decode($_POST['correctas'] ?? "")) ?? [""];
-    $incorrectas = json_decode(htmlspecialchars_decode($_POST['incorrectas'] ?? "")) ?? [""];
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        comprobarLetra($_POST['palabra'] ?? "", $secreta, $correctas, $incorrectas);
-    }
-
-    //echo "$secreta <br>";
-    createArraySecreta($secreta, $correctas);
-*/
     ?>
     <h1>Jugador actual <?= ($jugador == "player1") ? "Jugador 1" : "Jugador 2" ?></h1>
     <h1>Columna: <?= $columna ?></h1>
