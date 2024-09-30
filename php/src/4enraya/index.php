@@ -15,11 +15,13 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST"&&$jugador!="f") {
         //var_dump($columna,$jugador);
         hacerMovimiento($pantalla,$columna,$jugador);
+        if (comprobarGanador($pantalla,$jugador)) {
+            # code...
+        }
     }
     elegirJugador($jugador);
     ?>
     <h1>Jugador actual <?= ($jugador == "player1") ? "Jugador 1" : "Jugador 2" ?></h1>
-    <h1>Columna: <?= $columna ?></h1>
     <table>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <?php

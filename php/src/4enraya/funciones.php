@@ -52,3 +52,23 @@ function hacerMovimiento(&$pantalla,$columna,$jugador) {
         }
     }
 }
+function comprobarGanador($pantalla,$jugador){
+    if (comprobarHorizontal($pantalla,$jugador)){
+        return true;
+    }
+}
+function comprobarHorizontal($pantalla,$jugador) {
+    for ($i = count($pantalla); $i >= 1; $i--) {
+        $fichasSeguidas=0;
+        for ($a=1; $a <= count($pantalla[$i]); $a++) { 
+            if ($pantalla[$i][$a]===$jugador) {
+                $fichasSeguidas++;
+            }
+            if ($fichasSeguidas>=4) {
+                return true;
+            }
+        }
+        
+    }
+    return false;
+}
