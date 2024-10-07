@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="ca">
+
 <head>
     <meta charset="UTF-8">
     <title>Selecció de productes</title>
 </head>
+
 <body>
+    <?php
+    include_once "funciones.php";
+    addPage(getPage());
+    ?>
     <h1>Afegir productes al carret</h1>
     <form action="carret.php" method="POST">
         <label for="producte">Tria un producte:</label>
@@ -17,4 +23,5 @@
     </form>
     <a href="carret.php">Veure carret</a>
 </body>
+
 </html>

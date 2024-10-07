@@ -1,5 +1,7 @@
 <?php
 session_start();
+include_once "funciones.php";
+addPage(getPage());
 $users = [
     'user1@example.com' => 'password1',
     'user2@example.com' => 'password2',

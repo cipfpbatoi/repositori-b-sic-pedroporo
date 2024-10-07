@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+include_once "funciones.php";
+addPage(getPage());
 $carrito = $_SESSION['carrito'] ?? [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

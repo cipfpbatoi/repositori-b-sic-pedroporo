@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+include_once "funciones.php";
+addPage(getPage());
 $token = $_SESSION['token']??md5(uniqid(mt_rand(), true));
 $_SESSION['token'] = $token;
 if ($_SERVER["REQUEST_METHOD"] == "POST"&&$_POST['token'] !== $_SESSION['token']) {
