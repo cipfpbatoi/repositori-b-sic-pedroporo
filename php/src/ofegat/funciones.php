@@ -24,11 +24,21 @@
                     }
                 }
             }
-            function comprobarLetra(string $letra,string $secreta,&$letrasAdivinadas,&$incorrectas) {
+            function comprobarVictoria($secreta,$correctas) {
+                $letrasSecreta=str_split($secreta);
+                for ($i=0; $i < count($letrasSecreta); $i++) { 
+                    if (!in_array($letrasSecreta[$i],$correctas)) {
+                       return false; 
+                    }
+                }
+                return true;
+            }
+            function comprobarLetra(string $letra,string $secreta,&$letrasAdivinadas,&$incorrectas,&$intentos) {
                 if (!in_array($letra,$letrasAdivinadas)&&!in_array($letra,$incorrectas)) {
                     if (in_array($letra,str_split($secreta))) {
                         $letrasAdivinadas[]=$letra;
                     }else{
+                        $intentos--;
                         $incorrectas[]=$letra;
                     }
                     
