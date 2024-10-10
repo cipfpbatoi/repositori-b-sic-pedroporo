@@ -58,9 +58,9 @@ function hacerMovimiento(&$pantalla, $columna, $jugador)
         }
     }
 }
-function comprobarGanador($pantalla, $jugador)
+function comprobarGanador($pantalla, $jugador, $columna)
 {
-    if (comprobarHorizontal($pantalla, $jugador) || comprobarVertical($pantalla, $jugador) || comprobarInclinada($pantalla, $jugador)) {
+    if (comprobarHorizontal($pantalla, $jugador) || comprobarVertical($pantalla, $jugador) || comprobarInclinadaDerecha($pantalla, $jugador) || comprobarInclinadaIzquierda($pantalla, $jugador)) {
         return $jugador;
     }
     if (comprobarEmpate($pantalla)) {
@@ -78,16 +78,53 @@ function comprobarEmpate($pantalla)
         }
     }
 }
-function comprobarInclinada($pantalla, $jugador)
+function comprobarInclinadaDerecha($pantalla, $jugador)
 {
+    $fichasSeguidas = 0;
     for ($i = count($pantalla); $i >= 1; $i--) {
-        $fichasSeguidas = 0;
-        for ($a = 1; $a <= count($pantalla[$i]); $a++) {
-            if ($pantalla[$i][$a] === $jugador) {
+        for ($a = 1; $a <= NUM_COLUMNAS; $a++) {
+
+            if ($pantalla[$i][$a] == $jugador) {
                 $fichasSeguidas++;
+                for ($e = 1; $e <= NUMFICHASGANAR - 1; $e++) {
+                    if ($pantalla[$i - $e][$a + $e] == $jugador) {
+                        $fichasSeguidas++;
+                        if ($fichasSeguidas == NUMFICHASGANAR) {
+                            return true;
+                        }
+                    } else {
+                        $fichasSeguidas = 0;
+                        break;
+                    }
+                }
+            } else {
+                $fichasSeguidas = 0;
             }
-            if ($fichasSeguidas >= 4) {
-                return true;
+        }
+    }
+    return false;
+}
+function comprobarInclinadaIzquierda($pantalla, $jugador)
+{
+    $fichasSeguidas = 0;
+    for ($i = count($pantalla); $i >= 1; $i--) {
+        for ($a = NUM_COLUMNAS; $a >= 1; $a--) {
+
+            if ($pantalla[$i][$a] == $jugador) {
+                $fichasSeguidas++;
+                for ($e = 1; $e <= NUMFICHASGANAR - 1; $e++) {
+                    if ($pantalla[$i - $e][$a - $e] == $jugador) {
+                        $fichasSeguidas++;
+                        if ($fichasSeguidas == NUMFICHASGANAR) {
+                            return true;
+                        }
+                    } else {
+                        $fichasSeguidas = 0;
+                        break;
+                    }
+                }
+            } else {
+                $fichasSeguidas = 0;
             }
         }
     }

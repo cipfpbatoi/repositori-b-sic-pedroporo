@@ -28,13 +28,13 @@ if (isset($_GET['reiniciarJuego'])) {
     include_once "funciones.php";
     $pantalla = $_SESSION['pantalla'] ?? iniciarArray();
     //$pantalla = json_decode(htmlspecialchars_decode($_POST['pantalla'] ?? ""), true) ?? iniciarArray();
-    $jugador = $_SESSION['jugador'] ?? "";
+    $jugador = $_SESSION['jugador'] ?? "f";
     $columna = $_POST['columna'] ?? null;
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && $jugador != "") {
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && $jugador != "f") {
         //var_dump($columna,$jugador);
         hacerMovimiento($pantalla, $columna, $jugador);
         $jugadorActual = ($jugador == "player1") ?  $_COOKIE['user'] : "Jugador 2";
-        switch (comprobarGanador($pantalla, $jugador)) {
+        switch (comprobarGanador($pantalla, $jugador,$columna)) {
             case 'player1';
             case 'player2':
                 echo "<h1> Gana el jugador " . $jugadorActual . " </h1><br>";
