@@ -83,16 +83,15 @@ function comprobarInclinadaIzquierda($pantalla, $jugador, $columna)
     $fichasSeguidas = 1;
     $ultimaFila = comprobarUltimaFilaDeColumna($pantalla, $columna);
 
-    echo " Fila: $ultimaFila Columna: $columna";
     for ($i = 1; $i <= NUM_FILAS; $i++) {
-        if ($columna - $i >= 1 && $ultimaFila - $i>=1&&$pantalla[$ultimaFila - $i][$columna - $i] === $jugador) {
+        if ($columna - $i >= 1 && $ultimaFila - $i >= 1 && $pantalla[$ultimaFila - $i][$columna - $i] === $jugador) {
             $fichasSeguidas++;
         } else {
             break;
         }
     }
     for ($i = 1; $i <= NUM_FILAS; $i++) {
-        if ($columna + $i <= NUM_COLUMNAS && $ultimaFila + $i<=NUM_FILAS&&$pantalla[$ultimaFila + $i][$columna + $i] === $jugador) {
+        if ($columna + $i <= NUM_COLUMNAS && $ultimaFila + $i <= NUM_FILAS && $pantalla[$ultimaFila + $i][$columna + $i] === $jugador) {
             $fichasSeguidas++;
         } else {
             break;
@@ -131,14 +130,14 @@ function comprobarInclinadaDerecha($pantalla, $jugador, $columna)
 
     //echo " $ultimaFila $columna";
     for ($i = 1; $i <= NUM_FILAS; $i++) {
-        if ($columna - $i >= 1 && $ultimaFila + $i<=NUM_FILAS&&$pantalla[$ultimaFila + $i][$columna - $i] === $jugador) {
+        if ($columna - $i >= 1 && $ultimaFila + $i <= NUM_FILAS && $pantalla[$ultimaFila + $i][$columna - $i] === $jugador) {
             $fichasSeguidas++;
         } else {
             break;
         }
     }
     for ($i = 1; $i <= NUM_FILAS; $i++) {
-        if ($columna + $i <= NUM_FILAS && $ultimaFila - $i>=1&&$pantalla[$ultimaFila - $i][$columna + $i] === $jugador) {
+        if ($columna + $i <= NUM_FILAS && $ultimaFila - $i >= 1 && $pantalla[$ultimaFila - $i][$columna + $i] === $jugador) {
             $fichasSeguidas++;
         } else {
             break;
