@@ -60,7 +60,7 @@ function hacerMovimiento(&$pantalla, $columna, $jugador)
 }
 function comprobarGanador($pantalla, $jugador, $columna)
 {
-    if (comprobarHorizontal($pantalla, $jugador) || comprobarVertical($pantalla, $jugador) || comprobarInclinadaDerecha($pantalla, $jugador) || comprobarInclinadaIzquierda($pantalla, $jugador)) {
+    if (comprobarHorizontal($pantalla, $jugador, $columna) || comprobarVertical($pantalla, $jugador, $columna) || comprobarInclinadaDerecha($pantalla, $jugador, $columna) || comprobarInclinadaIzquierda($pantalla, $jugador, $columna)) {
         return $jugador;
     }
     if (comprobarEmpate($pantalla)) {
@@ -78,10 +78,30 @@ function comprobarEmpate($pantalla)
         }
     }
 }
-function comprobarInclinadaDerecha($pantalla, $jugador)
+function comprobarInclinadaIzquierda($pantalla, $jugador, $columna)
 {
-    $fichasSeguidas = 0;
-    for ($i = count($pantalla); $i >= 1; $i--) {
+    $fichasSeguidas = 1;
+    $ultimaFila = comprobarUltimaFilaDeColumna($pantalla, $columna);
+
+    echo " Fila: $ultimaFila Columna: $columna";
+    for ($i = 1; $i <= NUM_FILAS; $i++) {
+        if ($columna - $i >= 1 && $ultimaFila - $i>=1&&$pantalla[$ultimaFila - $i][$columna - $i] === $jugador) {
+            $fichasSeguidas++;
+        } else {
+            break;
+        }
+    }
+    for ($i = 1; $i <= NUM_FILAS; $i++) {
+        if ($columna + $i <= NUM_COLUMNAS && $ultimaFila + $i<=NUM_FILAS&&$pantalla[$ultimaFila + $i][$columna + $i] === $jugador) {
+            $fichasSeguidas++;
+        } else {
+            break;
+        }
+    }
+    if ($fichasSeguidas === NUMFICHASGANAR) {
+        return true;
+    }
+    /*for ($i = count($pantalla); $i >= 1; $i--) {
         for ($a = 1; $a <= NUM_COLUMNAS; $a++) {
 
             if ($pantalla[$i][$a] == $jugador) {
@@ -101,13 +121,33 @@ function comprobarInclinadaDerecha($pantalla, $jugador)
                 $fichasSeguidas = 0;
             }
         }
-    }
+    }*/
     return false;
 }
-function comprobarInclinadaIzquierda($pantalla, $jugador)
+function comprobarInclinadaDerecha($pantalla, $jugador, $columna)
 {
-    $fichasSeguidas = 0;
-    for ($i = count($pantalla); $i >= 1; $i--) {
+    $fichasSeguidas = 1;
+    $ultimaFila = comprobarUltimaFilaDeColumna($pantalla, $columna);
+
+    //echo " $ultimaFila $columna";
+    for ($i = 1; $i <= NUM_FILAS; $i++) {
+        if ($columna - $i >= 1 && $ultimaFila + $i<=NUM_FILAS&&$pantalla[$ultimaFila + $i][$columna - $i] === $jugador) {
+            $fichasSeguidas++;
+        } else {
+            break;
+        }
+    }
+    for ($i = 1; $i <= NUM_FILAS; $i++) {
+        if ($columna + $i <= NUM_FILAS && $ultimaFila - $i>=1&&$pantalla[$ultimaFila - $i][$columna + $i] === $jugador) {
+            $fichasSeguidas++;
+        } else {
+            break;
+        }
+    }
+    if ($fichasSeguidas === NUMFICHASGANAR) {
+        return true;
+    }
+    /*for ($i = count($pantalla); $i >= 1; $i--) {
         for ($a = NUM_COLUMNAS; $a >= 1; $a--) {
 
             if ($pantalla[$i][$a] == $jugador) {
@@ -127,41 +167,57 @@ function comprobarInclinadaIzquierda($pantalla, $jugador)
                 $fichasSeguidas = 0;
             }
         }
-    }
+    }*/
     return false;
 }
-function comprobarVertical($pantalla, $jugador)
+function comprobarVertical($pantalla, $jugador, $columna)
 {
     $fichasSeguidas = 0;
-    for ($a = 1; $a <= NUM_COLUMNAS; $a++) {
 
-        for ($i = count($pantalla); $i >= 1; $i--) {
-            if ($pantalla[$i][$a] == $jugador) {
-                $fichasSeguidas++;
-            } else {
-                $fichasSeguidas = 0;
-            }
-            if ($fichasSeguidas === NUMFICHASGANAR) {
-                return true;
-            }
+
+    for ($i = count($pantalla); $i >= 1; $i--) {
+        if ($pantalla[$i][$columna] == $jugador) {
+            $fichasSeguidas++;
+        } else {
+            $fichasSeguidas = 0;
         }
+        if ($fichasSeguidas === NUMFICHASGANAR) {
+            return true;
+        }
+    }
+
+    return false;
+}
+function comprobarHorizontal($pantalla, $jugador, $columna)
+{
+    $ultimaFila = comprobarUltimaFilaDeColumna($pantalla, $columna);
+    $fichasSeguidas = 1;
+    for ($b = $columna + 1; $b <= NUM_COLUMNAS; $b++) {
+        if ($pantalla[$ultimaFila][$b] === $jugador) {
+            $fichasSeguidas++;
+        } else {
+            break;
+        }
+    }
+
+    for ($i = $columna - 1; $i >= 1; $i--) {
+        if ($pantalla[$ultimaFila][$i] === $jugador) {
+            $fichasSeguidas++;
+        } else {
+            break;
+        }
+    }
+    if ($fichasSeguidas === NUMFICHASGANAR) {
+        return true;
     }
     return false;
 }
-function comprobarHorizontal($pantalla, $jugador)
+function comprobarUltimaFilaDeColumna($pantalla, $columna)
 {
-    foreach ($pantalla as $pantalla => $fila) {
-        $fichasSeguidas = 0;
-        for ($i = 1; $i <= count($fila); $i++) {
-            if ($fila[$i] === $jugador) {
-                $fichasSeguidas++;
-            } else {
-                $fichasSeguidas = 0;
-            }
-            if ($fichasSeguidas === NUMFICHASGANAR) {
-                return true;
-            }
+    for ($i = count($pantalla); $i >= 1; $i--) {
+        if ($pantalla[$i][$columna] === CASILLAVACIA) {
+            return $i + 1;
         }
     }
-    return false;
+    return 1;
 }
