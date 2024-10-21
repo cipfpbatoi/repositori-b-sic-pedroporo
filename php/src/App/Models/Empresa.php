@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-include_once("../../../vendor/autoload.php");
-
-use App\Models;
+use App\Models\Empleado;
 
 class Empresa
 {
@@ -12,6 +10,10 @@ class Empresa
     public function __construct()
     {
         $this->empleados = [];
+    }
+    public function getEmpleados()
+    {
+        return $this->empleados;
     }
     public function addWorker(Empleado $t)
     {
@@ -21,8 +23,16 @@ class Empresa
     {
         $codeHTML = [];
         foreach ($this->empleados as $empleados => $empleado) {
-            $codeHTML[] = $empleado.toHtml($empleado);
+            $codeHTML[] = $empleado->toHtml($empleado);
         }
         return implode("", $codeHTML);
+    }
+    public function getCosteNominas(): float
+    {
+        $total = 0.00;
+        foreach ($this->empleados as $empleado) {
+            $total += $empleado->getSou();
+        }
+        return $total;
     }
 }

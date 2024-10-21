@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-include_once("../../../vendor/autoload.php");
-
 use App\Models\Perosna;
 
 class Empleado extends Persona
@@ -42,6 +40,7 @@ class Empleado extends Persona
     {
         return $this->sou;
     }
+
     public static function toHtml(Persona $emp): string
     {
         $codeHTML = [];
