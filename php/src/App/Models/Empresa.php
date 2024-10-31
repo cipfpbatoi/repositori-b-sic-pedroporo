@@ -3,6 +3,10 @@
 namespace App\Models;
 
 use App\Models\Empleado;
+/**
+ * Summary of Empresa
+ *  @param mixed $name
+ */
 
 class Empresa
 {
